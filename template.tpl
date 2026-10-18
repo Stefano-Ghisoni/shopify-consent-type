@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -47,11 +47,11 @@ ___TEMPLATE_PARAMETERS___
     "type": "LABEL",
     "name": "stapeRequirement",
     "displayName": {
-      "text": "⚠️ REQUIREMENT: enable and configure Stape’s Shopify Customer Privacy API tag.",
+      "text": "⚠️ REQUIREMENT: enable and configure <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">Stape’s Shopify Customer Privacy API tag</a>. Wait until API loading and consent synchronization are complete before reading this variable.",
       "translations": [
         {
           "locale": "it",
-          "text": "⚠️ REQUISITO: deve essere attivo e correttamente configurato il tag Shopify Customer Privacy API di Stape."
+          "text": "⚠️ REQUISITO: attiva e configura il <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">tag Shopify Customer Privacy API di Stape</a>. Attendi il completamento del caricamento dell’API e della sincronizzazione del consenso prima di leggere questa variabile."
         }
       ]
     }
@@ -59,25 +59,65 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "SELECT",
     "name": "consentCategory",
-    "displayName": "Categoria di consenso Shopify",
+    "displayName": {
+      "text": "Shopify consent category",
+      "translations": [
+        {
+          "locale": "it",
+          "text": "Categoria di consenso Shopify"
+        }
+      ]
+    },
     "macrosInSelect": false,
     "selectItems": [
       {
         "value": "essential",
-        "displayValue": "Essential (_shopify_essential) — categoria necessaria"
+        "displayValue": {
+          "text": "Essential (_shopify_essential) — always true",
+          "translations": [
+            {
+              "locale": "it",
+              "text": "Essential (_shopify_essential) — sempre true"
+            }
+          ]
+        }
       },
       {
         "value": "analytics",
-        "displayValue": "Analytics (_shopify_analytics)"
+        "displayValue": {
+          "text": "Analytics (_shopify_analytics)",
+          "translations": [
+            {
+              "locale": "it",
+              "text": "Analisi (_shopify_analytics)"
+            }
+          ]
+        }
       },
       {
         "value": "marketing",
-        "displayValue": "Marketing (_shopify_marketing)"
+        "displayValue": {
+          "text": "Marketing (_shopify_marketing)",
+          "translations": [
+            {
+              "locale": "it",
+              "text": "Marketing (_shopify_marketing)"
+            }
+          ]
+        }
       }
     ],
     "simpleValueType": true,
     "defaultValue": "analytics",
-    "help": "Restituisce boolean true/false. Se la Customer Privacy API non è disponibile, restituisce undefined. Non confondere Essential con Preferences.",
+    "help": {
+      "text": "Analytics and Marketing return boolean true/false from Shopify's API, or undefined if unavailable. Essential always returns true by convention; it does not read consent or correspond to Preferences. Cookies are not read.",
+      "translations": [
+        {
+          "locale": "it",
+          "text": "Analisi e Marketing restituiscono true/false dall’API Shopify oppure undefined se non disponibile. Essential restituisce sempre true per convenzione: non legge un consenso e non equivale a Preferences. I cookie non vengono letti."
+        }
+      ]
+    },
     "alwaysInSummary": true
   }
 ]
@@ -316,16 +356,49 @@ scenarios:
 
 ___NOTES___
 
-Versione 1.0.0. Solo GTM Web nel contesto principale dello storefront.
-Non decifra cookie, non legge cookie HttpOnly, non carica librerie e non aggiorna il Consent Mode.
-Analytics/Marketing: permessi effettivi restituiti da Shopify, basati anche su regione e impostazioni del merchant. Non sono la sola scelta esplicita del visitatore.
-Essential: true costante per categoria necessaria; non attesta consenso, presenza cookie o funzionamento Shopify.
-API assente: undefined; usare nei trigger solo il confronto booleano con true.
-Una variabile non genera eventi: per reagire a una modifica consenso serve un evento dataLayer dopo visitorConsentCollected.
-Nel sandbox dei Custom Pixel Shopify l'API della finestra principale potrebbe non essere accessibile: occorre un bridge nel pixel basato sulla privacy API del pixel.
-Fonti: https://shopify.dev/docs/api/customer-privacy e https://www.shopify.com/legal/cookies
+Version 1.0.0.
 
-Requisito di installazione: tag Shopify Customer Privacy API di Stape attivo e configurato nello stesso contesto. Attendere caricamento API e sincronizzazione.
-Versione repository 1.0.0. Test inclusi: 16 scenari.
+Compatibility:
+- Google Tag Manager Web containers in the main storefront window.
+- Shopify Custom Pixel sandboxes may not expose the main window's Customer Privacy API.
+- Sandbox integrations require a dedicated privacy bridge.
 
+Installation requirement:
+- Enable and correctly configure Stape's Shopify Customer Privacy API tag in the same GTM Web context.
+- Wait until API loading and consent synchronization are complete before evaluating the variable.
+- Tag firing priority alone does not guarantee completion of asynchronous operations.
+- Do not use this variable as the consent source for the same Stape tag that initializes and synchronizes Shopify consent.
 
+Behavior:
+- Analytics and Marketing return effective permissions from Shopify's Customer Privacy API.
+- Effective permissions consider recorded consent, visitor region, and merchant settings.
+- Effective permissions are not equivalent to the visitor's explicit consent choices.
+- Essential always returns true by convention.
+- Essential does not attest consent, cookie presence, or Shopify functionality.
+- Essential does not correspond to Shopify's Preferences purpose.
+- Missing or non-callable API methods, invalid categories, and non-boolean responses return undefined.
+- Exceptions thrown by API methods are not caught.
+- Cookie presence is never interpreted as consent.
+
+Scope:
+- Does not read, decrypt, or modify cookies.
+- Does not load the Customer Privacy API.
+- Does not grant or update consent.
+- Does not update Google Consent Mode.
+- Does not generate data layer events or register event listeners.
+- Does not cache consent across evaluations.
+
+Consent changes:
+- Use a GTM event generated after consent synchronization to evaluate the updated state.
+- Shopify publishes visitorConsentCollected when consent changes.
+- This variable does not automatically subscribe to that event.
+- Require a boolean true result when using this variable to allow a tag to fire.
+
+Tests:
+- Includes 16 scenarios covering granted and denied permissions, unavailable methods,
+  invalid categories, non-boolean responses, and consent changes without caching.
+
+References:
+https://shopify.dev/docs/api/customer-privacy
+https://www.shopify.com/legal/cookies
+https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag
