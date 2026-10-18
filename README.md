@@ -84,7 +84,7 @@ The proposed repository name is **shopify-consent-type**, under **stefanoghisoni
 
 ```yaml
 versions:
-  - sha: 5caf211631486178f8aa212931f0167d522d05c6
+  - sha: 705618bcf0ab4ac5e0e0b92b4fac8d0b688a0eba
     changeNotes: "Initial release: Shopify consent category reader with Stape prerequisite and 16 tests."
 ```
 
