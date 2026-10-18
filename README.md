@@ -1,1 +1,0 @@
-# shopify-consent-api
