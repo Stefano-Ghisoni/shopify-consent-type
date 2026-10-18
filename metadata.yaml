@@ -1,5 +1,5 @@
 homepage: "https://stefanoghisoni.it"
 documentation: "https://github.com/Stefano-Ghisoni/shopify-consent-type/blob/main/README.md"
 versions:
-  - sha: 5caf211631486178f8aa212931f0167d522d05c6
-    changeNotes: "Initial release: Shopify consent category reader with Stape prerequisite and 16 tests."
+  - sha: 705618bcf0ab4ac5e0e0b92b4fac8d0b688a0eba
+    changeNotes: "Added link to Stape's Customer Privacy API tag in GTM web and edited __NOTE__ section in template.tpl"
