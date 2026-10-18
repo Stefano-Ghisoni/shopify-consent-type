@@ -1,5 +1,5 @@
 homepage: "https://stefanoghisoni.it"
-# Proposed repository name: shopify-consent-type. Adjust this URL if renamed.
-documentation: "https://github.com/stefanoghisoni-adv/shopify-consent-type/blob/main/README.md"
-# Add the actual GitHub commit SHA containing template.tpl before Gallery submission.
-versions: "9cf4fc6fa1ca236ddb7d9538c351dd50290118ba"
+documentation: "https://github.com/Stefano-Ghisoni/shopify-consent-api/blob/main/README.md"
+versions:
+  - sha: 9cf4fc6fa1ca236ddb7d9538c351dd50290118ba
+    changeNotes: "Initial release: Shopify consent category reader with Stape prerequisite and 16 tests."
