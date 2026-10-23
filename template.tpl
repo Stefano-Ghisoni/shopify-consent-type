@@ -47,11 +47,11 @@ ___TEMPLATE_PARAMETERS___
     "type": "LABEL",
     "name": "stapeRequirement",
     "displayName": {
-      "text": "⚠️ REQUIREMENT: enable and configure <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">Stape’s Shopify Customer Privacy API tag</a>. Wait until API loading and consent synchronization are complete before reading this variable.",
+      "text": "⚠️ REQUIREMENT: load Shopify’s Customer Privacy API and synchronize consent in the same GTM Web context. This guide uses <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">Stape’s Shopify Customer Privacy API tag</a>; another compatible API integration also works. Wait until API loading and consent synchronization are complete before reading this variable.",
       "translations": [
         {
           "locale": "it",
-          "text": "⚠️ REQUISITO: attiva e configura il <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">tag Shopify Customer Privacy API di Stape</a>. Attendi il completamento del caricamento dell’API e della sincronizzazione del consenso prima di leggere questa variabile."
+          "text": "⚠️ REQUISITO: carica la Customer Privacy API di Shopify e sincronizza il consenso nello stesso contesto GTM Web. Questa guida usa il <a href=\"https://tagmanager.google.com/gallery/#/owners/stape-io/templates/shopify-customer-privacy-tag\" target=\"_blank\">tag Shopify Customer Privacy API di Stape</a>; funziona anche un’altra integrazione API compatibile. Attendi il completamento del caricamento dell’API e della sincronizzazione del consenso prima di leggere questa variabile."
         }
       ]
     }
@@ -364,7 +364,9 @@ Compatibility:
 - Sandbox integrations require a dedicated privacy bridge.
 
 Installation requirement:
-- Enable and correctly configure Stape's Shopify Customer Privacy API tag in the same GTM Web context.
+- Load window.Shopify.customerPrivacy and synchronize consent in the same GTM Web context.
+- This guide uses Stape's Shopify Customer Privacy API tag; another integration that loads the same API and correctly synchronizes consent also works.
+- The variable does not check whether Stape is installed.
 - Wait until API loading and consent synchronization are complete before evaluating the variable.
 - Tag firing priority alone does not guarantee completion of asynchronous operations.
 - Do not use this variable as the consent source for the same Stape tag that initializes and synchronizes Shopify consent.
