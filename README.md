@@ -2,13 +2,13 @@
 
 A custom variable template for **Google Tag Manager Web containers**. It reads Shopify's effective Analytics and Marketing permissions through the Customer Privacy API and provides an Essential category with a constant `true` result.
 
-## Required Stape tag
+## Customer Privacy API requirement and Stape integration
 
-**The Shopify Customer Privacy API tag by Stape must be enabled and correctly configured in the same GTM Web context for the setup documented here.**
+**Shopify's `window.Shopify.customerPrivacy` API must be loaded and its consent state synchronized in the same GTM Web context.**
 
-Install the [Stape tag](https://stape.io/helpdesk/documentation/shopify-customer-privacy-api-tag) and configure its consent source from your CMP or Google Consent Mode. This variable reads Shopify's state; it does not synchronize or change that state.
+For the integration documented here, install the [Stape tag](https://stape.io/helpdesk/documentation/shopify-customer-privacy-api-tag) and configure its consent source from your CMP or Google Consent Mode. This variable reads Shopify's state; it does not synchronize or change that state.
 
-The underlying technical dependency is a loaded `window.Shopify.customerPrivacy` API. The variable does not inspect whether Stape is installed: an equivalent API integration also works technically. Stape is the required integration for this documented configuration.
+Stape is the integration used in this guide, not a mandatory technical dependency. The variable does not inspect whether Stape is installed. Another integration that loads the same API and correctly synchronizes consent also works.
 
 Wait until API loading and consent synchronization have completed before evaluating the variable. A tag firing priority alone does not guarantee completion of asynchronous operations. Use a verified completion event from your integration or evaluate on a later event after confirming readiness. This template does not generate a readiness event.
 
@@ -74,31 +74,23 @@ This local execution does not certify the GTM sandbox, editor import, live Stape
 | `README.md` | Setup, behavior, testing, and publishing instructions |
 | `LICENSE` | Apache License 2.0 |
 
-## Publish on GitHub and submit to the Gallery
+## Repository and Gallery submission
 
-The proposed repository name is **shopify-consent-type**, under **stefanoghisoni-adv**, following the owner spelling in the supplied reference project. This repository has not been created or published by this package. Adjust `metadata.yaml` if the actual owner, repository name, or default branch differs.
+The public repository is [Stefano-Ghisoni/shopify-consent-type](https://github.com/Stefano-Ghisoni/shopify-consent-type), with the project files at the root of the `main` branch.
 
-1. Put the four files at the repository root on `main` and commit them.
-2. Copy the real 40-character commit SHA containing the final `template.tpl`.
-3. Replace `versions: []` in `metadata.yaml` with:
+`metadata.yaml` already contains a release entry referencing commit `705618bcf0ab4ac5e0e0b92b4fac8d0b688a0eba`. Whenever `template.tpl` changes, commit the updated template first, then add its real 40-character commit SHA at the top of the `versions` list and commit the metadata update. Preserve previous release entries.
 
-```yaml
-versions:
-  - sha: 705618bcf0ab4ac5e0e0b92b4fac8d0b688a0eba
-    changeNotes: "Initial release: Shopify consent category reader with Stape prerequisite and 16 tests."
-```
+Before submitting:
 
-4. Commit the metadata change and push both commits. Reference the earlier template commit, not a fabricated SHA or a commit from another repository.
-5. Confirm the documentation URL resolves, enable Issues, run the tests in GTM, and confirm the Gallery terms in the template editor.
-6. Submit the public repository through the [Community Template Gallery](https://tagmanager.google.com/gallery/).
-
-`versions: []` is intentional for the GitHub preparation stage. It must be populated before Gallery submission. For later releases, add the new template commit SHA at the top of the versions list and preserve previous release entries.
+1. Ensure the latest release entry references the intended `template.tpl` revision and the documentation URL resolves.
+2. Keep Issues enabled, run the tests in GTM, and confirm the Gallery terms in the template editor.
+3. Submit the repository URL through the [Community Template Gallery](https://tagmanager.google.com/gallery/).
 
 ## Italiano
 
 ### Requisito operativo
 
-**Deve essere attivo e correttamente configurato il tag Shopify Customer Privacy API di Stape nello stesso contesto GTM Web.** Il tag sincronizza il consenso della CMP verso Shopify; questa variabile legge lo stato risultante.
+**L’API `window.Shopify.customerPrivacy` deve essere caricata e il suo stato di consenso sincronizzato nello stesso contesto GTM Web.** Il tag Shopify Customer Privacy API di Stape è l’integrazione descritta in questa guida: sincronizza il consenso della CMP verso Shopify e la variabile legge lo stato risultante. Stape non è un requisito tecnico obbligatorio; funziona anche un’altra integrazione che carichi la stessa API e sincronizzi correttamente il consenso.
 
 Attendi il completamento del caricamento dell'API e della sincronizzazione prima della lettura. La priorità di attivazione, da sola, non garantisce il completamento asincrono. Non usare questa variabile come sorgente di consenso dello stesso tag Stape che deve inizializzare l'API.
 
@@ -114,7 +106,7 @@ I cookie non vengono letti o decifrati. La variabile non carica l'API, non conce
 
 I 16 scenari incorporati sono passati nel runner locale con API simulate. Prima della pubblicazione esegui anche tutti i test nell'editor GTM e la verifica in Preview con accettazione, rifiuto e revoca.
 
-I quattro file sono pronti per essere caricati su GitHub. Prima dell'invio alla Gallery devi inserire in `metadata.yaml` lo SHA reale del commit contenente `template.tpl` e verificare l'URL del README. Nessuno SHA è stato inventato.
+La repository pubblica è [Stefano-Ghisoni/shopify-consent-type](https://github.com/Stefano-Ghisoni/shopify-consent-type), sul branch `main`. `metadata.yaml` contiene già una versione. Dopo ogni modifica a `template.tpl`, aggiungi in cima all’elenco lo SHA reale del nuovo commit del template, conservando le versioni precedenti. Prima dell’invio alla Gallery verifica che la versione punti al template da distribuire e che l’URL del README funzioni.
 
 ## References
 
